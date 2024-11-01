@@ -3,7 +3,7 @@ import numpy as np
 import math
 
 def plot_monte_carlo():
-    data = np.genfromtxt(fname = "file.txt", dtype = float, delimiter = ',').transpose()
+    data = np.genfromtxt(fname = "../results/montecarlo.txt", dtype = float, delimiter = ',').transpose()
     fig, ax = plt.subplots()
     ax.set_xscale('log')
     ax.plot(data[0], data[1], label='Monte Carlo estimate')
