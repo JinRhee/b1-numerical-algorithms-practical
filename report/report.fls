@@ -175,6 +175,10 @@ INPUT ./images/monte_carlo_plot.png
 INPUT ./images/monte_carlo_plot.png
 INPUT ./images/monte_carlo_plot.png
 INPUT ./images/monte_carlo_plot.png
+INPUT ./images/plot_newton_raphson.png
+INPUT ./images/plot_newton_raphson.png
+INPUT ./images/plot_newton_raphson.png
+INPUT ./images/plot_newton_raphson.png
 INPUT report.aux
 INPUT ./report.out
 INPUT ./report.out

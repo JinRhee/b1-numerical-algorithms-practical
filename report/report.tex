@@ -57,14 +57,22 @@ higher accuracy than that of Newton-Raphson or Monte Carlo.
 \par Empirically, $[\texttt{Chud., Newt., Mont.}]$
 take $[\texttt{0.00025ms, 0.00063ms, 1551.81ms}]$ to produce errors of: $[\texttt{2.93-14, 5.00e-08, 3.92e-04}]$.
 Due to both superior accuracy and efficiency, the Chudnovsky algorithm is recommended for estimating $\pi$.
+
 \newpage
+\thispagestyle{empty}
 \section*{Appendix}
 \subsection*{Figures}
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=\textwidth]{monte_carlo_plot.png}
+    \includegraphics[width=0.5\textwidth]{monte_carlo_plot.png}
     \caption{Monte Carlo method error plots.}
     \label{fig:monte_carlo_plot}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{plot_newton_raphson.png}
+    \caption{Newton-Raphson error plots.}
+    \label{fig:newton-raphson_plot}
 \end{figure}
 \subsection*{Equations}
 \begin{equation}

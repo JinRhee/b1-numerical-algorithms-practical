@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1730735644.81404 "/Users/jinrhee/Desktop/Oxford/Engineering Science/2024-25/B Papers/B1 Engineering Computation/Numerical Algorithms/b1-numerical-algorithms-practical/report/report.tex" "report.pdf" "report" 1730735645.42233 0
-  "/Users/jinrhee/Desktop/Oxford/Engineering Science/2024-25/B Papers/B1 Engineering Computation/Numerical Algorithms/b1-numerical-algorithms-practical/report/report.tex" 1730735644.6242 4387 0520d8fac2cf5cae57350d97f1430605 ""
+["pdflatex"] 1730736421.90071 "/Users/jinrhee/Desktop/Oxford/Engineering Science/2024-25/B Papers/B1 Engineering Computation/Numerical Algorithms/b1-numerical-algorithms-practical/report/report.tex" "report.pdf" "report" 1730736422.54883 0
+  "/Users/jinrhee/Desktop/Oxford/Engineering Science/2024-25/B Papers/B1 Engineering Computation/Numerical Algorithms/b1-numerical-algorithms-practical/report/report.tex" 1730736421.70402 4604 ca6a80ed3c04101516449ffff1883135 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/jknappen/ec/ecbx1095.tfm" 1136768653 3584 21b378cca2e40816b0e6d74a4dc98f04 ""
@@ -106,10 +106,11 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1724331858.30539 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1724331768 8221430 e0d87013ce00b1eecfac04f36b71b02f ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "images/monte_carlo_plot.png" 1730725324.27873 46470 8cb037e916d933a9b1eece8ede502c4c ""
-  "report.aux" 1730735645.33523 840 0c651c470b8a6acbf7335972a422b787 "pdflatex"
-  "report.out" 1730735645.13651 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "report.tex" 1730735644.6242 4387 0520d8fac2cf5cae57350d97f1430605 ""
+  "images/monte_carlo_plot.png" 1730736269.9064 49336 85173184cc65c58d59018e94a8ff6aeb ""
+  "images/plot_newton_raphson.png" 1730736271.44865 29194 d597c38f23ffb976f35259452b95c098 ""
+  "report.aux" 1730736422.46116 1061 caa05810048d8881a490f105c7764cd5 "pdflatex"
+  "report.out" 1730736422.23046 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "report.tex" 1730736421.70402 4604 ca6a80ed3c04101516449ffff1883135 ""
   (generated)
   "report.aux"
   "report.log"
