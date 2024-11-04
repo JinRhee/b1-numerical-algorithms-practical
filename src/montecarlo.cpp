@@ -4,6 +4,7 @@
 #include <vector>
 #include <iomanip>
 #include <limits>
+#include <chrono>
 
 /**
  * @brief Calculate pi by monte carlo with RV following uniform distribution
@@ -21,6 +22,29 @@ double monte_carlo(const int& iter_num, std::vector<double>& r_vec) {
     for(int i = 0; i < iter_num; i++) {
         r_squared = std::pow(distribution(generator), 2) + std::pow(distribution(generator), 2);
         r_vec.push_back(r_squared);
+        if (r_squared <= 1.0) {
+            inside_count++;
+        }
+        total_count++;
+    }
+    return static_cast<double>(inside_count / static_cast<double>(total_count) * 4);
+}
+
+/**
+ * @brief Monte Carlo for timing purpose (no saving in vector)
+ * 
+ * @param iter_num 
+ * @param r_vec 
+ * @return double 
+ */
+double monte_carlo_timing(const int& iter_num) {
+    double r_squared;   // Does using r or r^2 matter?
+    int total_count = 0, inside_count = 0;
+    std::default_random_engine generator;
+    std::uniform_real_distribution<double> distribution(0.0, 1.0);
+    
+    for(int i = 0; i < iter_num; i++) {
+        r_squared = std::pow(distribution(generator), 2) + std::pow(distribution(generator), 2);
         if (r_squared <= 1.0) {
             inside_count++;
         }
@@ -72,15 +96,40 @@ double get_variance(std::vector<double>& vec) {
 double newton_raphson(double x_0, double err, int& count) {
     double x, x_prev, temp;
     x = x_0;
-    x_prev = x + err;
+    x_prev = x + err * 2;
     count = 0;
-    //std::cout << std::setprecision(19) << x << std::endl;
-    while (abs(x - x_prev) >= err) {
+    //std::cout << "error:" << err << std::endl;
+    while (fabs(x - x_prev) >= err) {
         temp = x;
-        x = x_prev - static_cast<double>(tan(x_prev));
+        x = x_prev - static_cast<double>(tanf(x_prev));
         x_prev = temp;
         count++;
-        //std::cout << std::setprecision(19) << x << ' ' << x_prev << ' ' << std::endl;
+        //std::cout << std::setprecision(19) << x << ' ' << x_prev << ' ' << fabs(x - x_prev) << std::endl;
+        if(fabs(x - x_prev) < err) {
+            break;
+        }
+    }
+    return static_cast<double>(x);
+}
+
+/**
+ * @brief Newton-Raphson for timing purpose
+ * 
+ * @param x_0 
+ * @param err 
+ * @return double 
+ */
+double newton_raphson_timing(double x_0, double err) {
+    double x, x_prev, temp;
+    x = x_0;
+    x_prev = x + err * 2;
+    while (fabs(x - x_prev) >= err) {
+        temp = x;
+        x = x_prev - static_cast<double>(tanf(x_prev));
+        x_prev = temp;
+        if(fabs(x - x_prev) < err) {
+            break;
+        }
     }
     return static_cast<double>(x);
 }
@@ -120,29 +169,63 @@ double chudnovsky(double digit) {
 int main() {
     std::vector<double> r_vec;
     std::ofstream myfile;
-    myfile.open("../results/montecarlo.txt");
-    myfile << "N,estimate,variance" << std::endl;
+    double pi = 3.1415926535897932;
+    double estimate;
     myfile << std::setprecision(std::numeric_limits<double>::max_digits10);
-    
+
+    // Monte Carlo
+    myfile.open("./results/montecarlo.txt");
+    myfile << "N,estimate,variance,error" << std::endl;
+
     for(int i = 0; i < 25; i++) {
-        myfile << std::pow(2, i) << ',' << monte_carlo(std::pow(2, i), r_vec) << ',' << get_variance(r_vec) << std::endl;
+        std::cout << i << std::endl;
+        int N = static_cast<int>(std::round(std::pow(2, i)));
+        estimate = monte_carlo(N, r_vec);
+        myfile << N << ',' << estimate << ',' << get_variance(r_vec) << ',' << fabs((pi - estimate)) << std::endl;
+    }
+    myfile.close();
+    
+    // Newton Raphson
+    int count;
+    myfile.open("./results/newton_raphson.txt");
+    myfile << "estimate,stop_error,count,error" << std::endl;
+    for(int i = 0; i < 8; i++) {
+        estimate = newton_raphson(2.0, std::pow(0.1, i), count);
+        myfile << estimate << ',' << std::pow(0.1, i)<< ',' << count << ',' << fabs((pi - estimate)) << std::endl;
+    }
+    // Custom error value: 5.0e-08
+    myfile << newton_raphson(2.0, 5.0e-08, count) << ',' << count << ',' << 5.0e-08 << std::endl;
+    myfile << newton_raphson(2.0, 3.0e-08, count) << ',' << count << ',' << 5.0e-08 << std::endl;
+    myfile.close();
+    
+    // Chudnovsky
+    myfile.open("./results/chudnovsky.txt");
+    myfile << "estimate,iter_num,error" << std::endl;
+    for(double i = 0.0; i < 30.0; i++) {
+        estimate = chudnovsky(i);
+        myfile << estimate << ',' << i << ',' << fabs((pi - estimate)) << std::endl;
     }
     myfile.close();
 
-    int count;
-    myfile.open("../results/newton_raphson.txt");
-    myfile << "estimate,stop_error,count" << std::endl;
-    for(int i = 0; i < 7; i++) {
-        myfile << newton_raphson(2.0, std::pow(0.1, i), count) << ',' << count << ',' << std::pow(0.1, i) << std::endl;
-    }
-    myfile.close();
-    
-    myfile.open("../results/chudnovsky.txt");
-    myfile << "estimate,iter_num" << std::endl;
-    for(double i = 0.0; i < 10.0; i++) {
-        myfile << chudnovsky(10.0*i) << ',' << 10.0*i << std::endl;
-    }
-    myfile.close();
+    // Timing
+    std::cout << std::setprecision(std::numeric_limits<double>::max_digits10);
+    auto t1 = std::chrono::high_resolution_clock::now();
+    monte_carlo_timing(std::pow(2, 24));
+    auto t2 = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> ms_double = t2 - t1;
+    std::cout << ms_double.count() << "ms " << monte_carlo_timing(std::pow(2, 24)) << std::endl;
+
+    auto t3 = std::chrono::high_resolution_clock::now();
+    newton_raphson_timing(2.0, 3.0e-08);
+    auto t4 = std::chrono::high_resolution_clock::now();
+    ms_double = t4 - t3;
+    std::cout << ms_double.count() << "ms " << newton_raphson_timing(2.0, 3.0e-08) << std::endl;
+
+    auto t5 = std::chrono::high_resolution_clock::now();
+    chudnovsky(2.0);
+    auto t6 = std::chrono::high_resolution_clock::now();
+    ms_double = t6 - t5;
+    std::cout << ms_double.count() << "ms " << chudnovsky(2.0) << std::endl;
 
     /*
     std::cout << std::setprecision(std::numeric_limits<double>::max_digits10);
