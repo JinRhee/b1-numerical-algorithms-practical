@@ -1,0 +1,27 @@
+\begin{thebibliography}{}
+
+\bibitem [\protect \citeauthoryear {%
+{Wikipedia contributors}%
+}{%
+{Wikipedia contributors}%
+}{%
+{\protect \APACyear {2024}}%
+}]{%
+enwiki:1253211016}
+\APACinsertmetastar {%
+enwiki:1253211016}%
+\begin{APACrefauthors}%
+{Wikipedia contributors}.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2024}{}{}.
+\newblock
+\APACrefbtitle {Chudnovsky algorithm --- {Wikipedia}{,} The Free Encyclopedia.} {Chudnovsky algorithm --- {Wikipedia}{,} the free encyclopedia.}
+\newblock
+\begin{APACrefURL} \url{https://en.wikipedia.org/w/index.php?title=Chudnovsky_algorithm&oldid=1253211016} \end{APACrefURL}
+\newblock
+\APACrefnote{[Online; accessed 3-November-2024]}
+\PrintBackRefs{\CurrentBib}
+
+\end{thebibliography}
