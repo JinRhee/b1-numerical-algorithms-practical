@@ -46,7 +46,7 @@ the sample size increases. We can thus use the sample variance to plot error bar
 a standard deviation. A \texttt{double} constant value of $\pi$ is used to calculate the relative error, which is
 plotted against the sample size \ref{fig:monte_carlo_plot}.
 \par{Newton-Raphson.} An analysis using the Taylor expansion shows that the error propogates quadratically $\epsilon_{n+1}\propto \epsilon_n^2$
-at each iteration. In implementation, however, it is seen that 
+at each iteration. The quadratic error propogation can be used with the initial error to quantify error at some iteration: $\epsilon_{n} \propto \epsilon_{0}^{2^{n-1}}$
 \par{Chudnovsky algorithm.} Error originates from the truncation of the infinite series and the precision of the floating point 
 representation of the \texttt{double} data type. The later is dominant, as empirically the series sum of more than 2 terms
 returns the same value.

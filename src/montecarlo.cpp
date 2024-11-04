@@ -194,8 +194,10 @@ int main() {
         myfile << estimate << ',' << std::pow(0.1, i)<< ',' << count << ',' << fabs((pi - estimate)) << std::endl;
     }
     // Custom error value: 5.0e-08
-    myfile << newton_raphson(2.0, 5.0e-08, count) << ',' << count << ',' << 5.0e-08 << std::endl;
-    myfile << newton_raphson(2.0, 3.0e-08, count) << ',' << count << ',' << 5.0e-08 << std::endl;
+    estimate = newton_raphson(2.0, 5.0e-08, count);
+    myfile << estimate << ',' << 5.0e-08 << ',' << count << ',' << fabs(pi - estimate) << std::endl;
+    estimate = newton_raphson(2.0, 3.0e-08, count);
+    myfile << estimate << ',' << 3.0e-08 << ',' << count << ',' << fabs(pi - estimate) << std::endl;
     myfile.close();
     
     // Chudnovsky

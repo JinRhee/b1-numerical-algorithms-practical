@@ -27,6 +27,16 @@ def plot_monte_carlo():
     fig.savefig("plot")
     plt.show()
 
+def plot_newton_raphson():
+    data = np.genfromtxt(fname = "./results/newton_raphson.txt", dtype = float, delimiter = ',').transpose()
+    fig, ax = plt.subplots()
+    ax.plot(data[2], data[3], label='absolute error')
+    ax.legend()
+    ax.title.set_text('Newton-Raphson method')
+    fig.savefig("plot_newton_raphson")
+    plt.show()
+
 if __name__ == "__main__":
-    plot_monte_carlo()
+    #plot_monte_carlo()
+    plot_newton_raphson()
     
