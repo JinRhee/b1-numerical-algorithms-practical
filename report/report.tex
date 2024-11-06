@@ -8,9 +8,11 @@
 \usepackage[htt]{hyphenat}
 \usepackage{hyperref}
 \usepackage{amsfonts}
+\usepackage{biblatex}[sorting=none]
 
+\addbibresource{./refs.bib}
 \graphicspath{{./images/}}
-%\setlength{\droptitle}{-5em}
+\setlength{\droptitle}{-5em}
 
 \title{B1 Numerical Algorithms: Computing value of $\pi$}
 \author{Jin Rhee}
@@ -36,27 +38,28 @@ iterates $x_n=x_{n-1}+\tan{x_{n-1}}$ and terminates when $|x_n - x_{n-1}| \leq \
 Multiple error values are tested (default $\epsilon=0.1$) and the algorithm is given an initial estimate of $x_0=2$.
 \par{Chudnovsky algorithm.}
 This algorithm \ref{eq:chudnovsky} is proposed as the third method to estimate $\pi$. In short, this algorithm calculates
-$\pi$ as the sum of an infinite series.
+$\pi$ as the sum of an infinite series.\cite{enwiki:1253211016}
 
 \paragraph{Error}
 All three methods are implemented in 8-byte \texttt{double} which offers a maximum precision to
 16 decimal points.
 \par{Monte Carlo.} The Central Limit Theorem states that the sample average approaches the normal distribution as
-the sample size increases. We can thus use the sample variance to plot error bars representing
-a standard deviation. A \texttt{double} constant value of $\pi$ is used to calculate the relative error, which is
-plotted against the sample size \ref{fig:monte_carlo_plot}.
+the sample size increases. Due to this, we can use the sample variance to plot error bars representing one standard deviation.\ref{fig:monte_carlo_plot}
+Further, the relative error of the estimate is plotted against the sample size, showing its proportionality to $\frac{1}{\sqrt{N}}$.\cite{enwiki:1255738066}
+
 \par{Newton-Raphson.} An analysis using the Taylor expansion shows that the error propogates quadratically $\epsilon_{n+1}\propto \epsilon_n^2$
-at each iteration. The quadratic error propogation can be used with the initial error to quantify error at some iteration: $\epsilon_{n} \propto \epsilon_{0}^{2^{n-1}}$
+at each iteration.\cite{newton:err} The quadratic error propogation can be used with the initial error to quantify error at some iteration: $\epsilon_{n} \propto \epsilon_{0}^{2^{n}}$
+
 \par{Chudnovsky algorithm.} Error originates from the truncation of the infinite series and the precision of the floating point 
-representation of the \texttt{double} data type. The later is dominant, as empirically the series sum of more than 2 terms
+representation of the \texttt{double} data type. The later is dominant, as empirically the series sum of more than two terms
 returns the same value.
 
 \paragraph{Discussion} The Chudnovsky algorithm is most efficient and accurate method out of the three. Though requiring 
-factorial calculation, it only needs to sum two terms of the series to achieve
-higher accuracy than that of Newton-Raphson or Monte Carlo.
+(costly) factorial computation, it needs only two terms of the series to achieve a
+higher accuracy than that of Newton-Raphson or Monte Carlo within the 16 decimal limit set by the \texttt{double} data type.
 \par Empirically, $[\texttt{Chud., Newt., Mont.}]$
-take $[\texttt{0.00025ms, 0.00063ms, 1551.81ms}]$ to produce errors of: $[\texttt{2.93-14, 5.00e-08, 3.92e-04}]$.
-Due to both superior accuracy and efficiency, the Chudnovsky algorithm is recommended for estimating $\pi$.
+take $[\texttt{0.00025ms, 0.00063ms, 1551.81ms}]$ to produce absolute errors of $[\texttt{2.93-14, 5.00e-08, 3.92e-04}]$.
+Due to both superior accuracy and efficiency on the tested implementation, the Chudnovsky algorithm is recommended for estimating $\pi$.
 
 \newpage
 \thispagestyle{empty}
@@ -79,6 +82,8 @@ Due to both superior accuracy and efficiency, the Chudnovsky algorithm is recomm
     \label{eq:chudnovsky}
     \frac{1}{\pi} =  12\sum_{k=0}^{\infty}\frac{a}{b} \frac{(-1)^k(6k)!(545140134k+13591409)}{(3k)!(k!)^3(640320)^{3k+3/2}}
 \end{equation}
+
+\printbibliography
 \end{document}
 
 
